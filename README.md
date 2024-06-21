@@ -278,7 +278,7 @@ Un administrador desea obtener detalles de todas las rutas, incluyendo los auxil
     FROM ruta_auxiliares ra
     JOIN rutas r ON ra.ruta_id=r.ruta_id
     JOIN auxiliares a ON ra.auxiliar_id=a.auxiliar_id
-    
+
     +---------+------------------------------+-------------+-----------------+
     | Ruta_id | Descripcion                  | Auxiliar_id | Nombre_auxiliar |
     +---------+------------------------------+-------------+-----------------+
@@ -293,14 +293,80 @@ Un administrador desea obtener detalles de todas las rutas, incluyendo los auxil
 ### Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
 Un administrador desea generar un reporte de todos los paquetes agrupados por sucursal y estado.
 ```sql
-    
-    ```
+        SELECT 
+    s.nombre AS sucursal,
+    e.descripcion AS estado,
+    p.paquete_id AS Paquete_ID,
+    p.contenido AS Contenido,
+    p.peso AS Peso,
+    p.valor_declarado AS valor,
+    p.largo AS largo,
+    p.ancho AS ancho,
+    p.alto AS alto
+FROM 
+    sucursales s
+JOIN 
+    envios en ON s.sucursal_id = en.ruta_id
+JOIN 
+    paquetes p ON en.paquete_id = p.paquete_id
+JOIN 
+    seguimiento seg ON p.paquete_id = seg.paquete_id
+JOIN 
+    estados e ON seg.estado_id = e.estado_id
+
++------------+-------------+------------+--------------+-------+---------+-------+-------+-------+
+| sucursal   | estado      | Paquete_ID | Contenido    | Peso  | valor   | largo | ancho | alto  |
++------------+-------------+------------+--------------+-------+---------+-------+-------+-------+
+| Sucursal 1 | recibido    |          1 | Electrónicos | 10.50 | 1500.00 | 50.00 | 30.00 | 20.00 |
+| Sucursal 2 | en transito |          2 | Ropa         |  5.75 |  500.00 | 40.00 | 20.00 | 10.00 |
+| Sucursal 3 | recibido    |          3 | Libros       | 20.00 |  300.00 | 60.00 | 40.00 | 30.00 |
+| Sucursal 4 | recibido    |          4 | Juguetes     | 15.25 |  200.00 | 70.00 | 50.00 | 40.00 |
+| Sucursal 5 | recibido    |          5 | Herramientas |  8.00 |  800.00 | 30.00 | 20.00 | 15.00 |
++------------+-------------+------------+--------------+-------+---------+-------+-------+-------+
+```
 ### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
 ```sql
-    SELECT
-    FROM
-    JOIN
 
+SELECT 
+    p.paquete_id,
+    p.peso,
+    p.contenido,
+    p.valor_declarado,
+    ts.descripcion AS tipo_servicio,
+    p.largo,
+    p.ancho,
+    p.alto,
+    e.envio_fecha,
+    e.destino,
+    c.nombre AS cliente,
+    c.email,
+    c.direccion AS direccion_cliente,
+    r.descripcion AS ruta,
+    seg.ubicacion,
+    seg.fecha_hora,
+    es.descripcion AS estado
+FROM 
+    paquetes p
+JOIN 
+    envios e ON p.paquete_id = e.paquete_id
+JOIN 
+    clientes c ON e.cliente_id = c.cliente_id
+JOIN 
+    rutas r ON e.ruta_id = r.ruta_id
+JOIN 
+    seguimiento seg ON p.paquete_id = seg.paquete_id
+JOIN 
+    estados es ON seg.estado_id = es.estado_id
+JOIN 
+    tipo_servicio ts ON p.tipo_servicio_id = ts.tipo_servicio_id
+WHERE 
+    p.paquete_id = 4
+
++------------+-------+-----------+-----------------+---------------+-------+-------+-------+-------------+---------------------------------+-----------+-----------------------+-------------------------+---------------------------+-------------+---------------------+----------+
+| paquete_id | peso  | contenido | valor_declarado | tipo_servicio | largo | ancho | alto  | envio_fecha | destino                         | cliente   | email                 | direccion_cliente       | ruta                      | ubicacion   | fecha_hora          | estado   |
++------------+-------+-----------+-----------------+---------------+-------+-------+-------+-------------+---------------------------------+-----------+-----------------------+-------------------------+---------------------------+-------------+---------------------+----------+
+|          4 | 15.25 | Juguetes  |          200.00 | estandar      | 70.00 | 50.00 | 40.00 | 2024-06-13  | 101 Hollywood Blvd, Los Angeles | Empresa D | contacto@empresad.com | 456 Elm St, Los Angeles | Ruta Los Angeles-New York | Los Angeles | 2024-06-13 11:00:00 | recibido |
++------------+-------+-----------+-----------------+---------------+-------+-------+-------+-------------+---------------------------------+-----------+-----------------------+-------------------------+---------------------------+-------------+---------------------+----------+
 ```
 
 ## Casos de uso Between, In y Not In
