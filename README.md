@@ -11,7 +11,8 @@ control de sucursales, vehículos, chóferes y asistentes de distribución, así
 ![alt text](ERDDiagram1.jpg)
 ## casos de uso primarios:
 
-Caso de Uso 1: Registrar un Nuevo País
+### Caso de Uso 1: 
+Registrar un Nuevo País
 Descripción: Un administrador desea agregar un nuevo país a la base de datos.
 
  ```sql
