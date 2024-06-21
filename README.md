@@ -8,7 +8,7 @@ ocupará de la gestión de paquetes, el seguimiento de envíos, la información 
 control de sucursales, vehículos, chóferes y asistentes de distribución, así como.
 
 # Estructura de base de datos
-![alt text](base-de-datos-foto.jpg)
+![alt text](ERDDiagram1.jpg)
 ## casos de uso primarios:
 
 Caso de Uso 1: Registrar un Nuevo País
