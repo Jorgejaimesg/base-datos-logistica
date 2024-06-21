@@ -662,11 +662,9 @@ WHERE
     ts.descripcion IN ('nacional', 'internacional');
 
 +------------+-----------+-----------------------+-------------------------------------------+---------------+
-| cliente_id | nombre    | email                 | direccion
-    | tipo_servicio |
+| cliente_id | nombre    | email                 | direccion                                 | tipo_servicio |
 +------------+-----------+-----------------------+-------------------------------------------+---------------+
-| 1001001001 | Empresa A | contacto@empresaa.com | Calle Falsa 123, Bogotá
-    | nacional      |
+| 1001001001 | Empresa A | contacto@empresaa.com | Calle Falsa 123, Bogotá                   | nacional      |
 | 3001001001 | Empresa E | contacto@empresae.com | Avenida Insurgentes 123, Ciudad de México | nacional      |
 | 1002002002 | Empresa B | contacto@empresab.com | Avenida Siempre Viva 742, Medellín        | internacional |
 +------------+-----------+-----------------------+-------------------------------------------+---------------+
