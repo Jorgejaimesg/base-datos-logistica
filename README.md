@@ -9,7 +9,7 @@ control de sucursales, vehículos, chóferes y asistentes de distribución, así
 
 # Estructura de base de datos
 
-![alt text](base-de-datos-foto.jpg)
+![alt text](base-de-datos-foto-1.jpg)
 
 
 ## casos de uso primarios:
