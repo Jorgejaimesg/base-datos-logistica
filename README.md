@@ -278,10 +278,7 @@ Un administrador desea obtener detalles de todas las rutas, incluyendo los auxil
     FROM ruta_auxiliares ra
     JOIN rutas r ON ra.ruta_id=r.ruta_id
     JOIN auxiliares a ON ra.auxiliar_id=a.auxiliar_id
-```
-### Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
-Un administrador desea generar un reporte de todos los paquetes agrupados por sucursal y estado.
-```sql
+    
     +---------+------------------------------+-------------+-----------------+
     | Ruta_id | Descripcion                  | Auxiliar_id | Nombre_auxiliar |
     +---------+------------------------------+-------------+-----------------+
@@ -292,6 +289,11 @@ Un administrador desea generar un reporte de todos los paquetes agrupados por su
     |       4 | Ruta Los Angeles-New York    | 4455667788  | James Brown     |
     |       5 | Ruta Ciudad de México-Bogotá | 5566778899  | Patricia White  |
     +---------+------------------------------+-------------+-----------------+
+```
+### Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
+Un administrador desea generar un reporte de todos los paquetes agrupados por sucursal y estado.
+```sql
+    
     ```
 ### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
 ```sql
