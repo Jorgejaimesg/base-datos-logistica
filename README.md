@@ -162,3 +162,86 @@ Un administrador desea rastrear la ubicación actual de un paquete específico.
     +------------+-----------+
 
 ```
+## Casos Multitabla
+### Caso de Uso 1: Obtener Información Completa de Envíos
+Un administrador desea obtener la información completa de todos los envíos, incluyendo detalles del cliente, paquete, ruta, conductor, y sucursal.
+```sql
+
+```
+### Caso de Uso 2: Obtener Historial de Envíos de un Cliente
+Un administrador desea obtener el historial completo de envíos de un cliente específico, incluyendo detalles de los paquetes y los eventos de seguimiento.
+```sql
+
+```
+### Caso de Uso 3: Listar Conductores y sus Rutas Asignadas
+Un administrador desea obtener una lista de todos los conductores y las rutas a las que están asignados, incluyendo detalles del vehículo utilizado y la sucursal correspondiente.
+```sql
+
+```
+## Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
+Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
+```sql
+
+```
+### Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
+Un administrador desea generar un reporte de todos los paquetes agrupados por sucursal y estado.
+```sql
+
+```
+### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento
+Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
+```sql
+
+```
+
+## Casos de uso Between, In y Not In
+### Caso de Uso 1: Obtener Paquetes Enviados Dentro de un Rango de Fechas
+Un administrador desea obtener todos los paquetes que fueron enviados dentro de un rango de fechas específico.
+```sql
+
+```
+### Caso de Uso 2: Obtener Paquetes con Ciertos Estados
+Un administrador desea obtener todos los paquetes que tienen ciertos estados específicos (por ejemplo, 'en tránsito' o 'entregado').
+```sql
+
+```
+### Caso de Uso 3: Obtener Paquetes Excluyendo Ciertos Estados
+Un administrador desea obtener todos los paquetes excluyendo aquellos que tienen ciertos estados específicos (por ejemplo, 'recibido' o 'retenido en aduana').
+```sql
+
+```
+### Caso de Uso 4: Obtener Clientes con Envíos Realizados Dentro de un Rango de Fechas
+Un administrador desea obtener todos los clientes que realizaron envíos dentro de un rango de fechas específico.
+```sql
+
+```
+### Caso de Uso 5: Obtener Conductores Disponibles que No Están Asignados a Ciertas Rutas
+Un administrador desea obtener todos los conductores que no están asignados a ciertas rutas específicas.
+```sql
+
+```
+### Caso de Uso 6: Obtener Información de Paquetes con Valor Declarado Dentro de un Rango Específico
+Un administrador desea obtener todos los paquetes cuyo valor declarado está dentro de un rango específico.
+```sql
+
+```
+### Caso de Uso 7: Obtener Auxiliares Asignados a Rutas Específicas
+Un administrador desea obtener todos los auxiliares de reparto que están asignados a ciertas rutas específicas.
+```sql
+
+```
+### Caso de Uso 8: Obtener Envíos a Destinos Excluyendo Ciertas Ciudades
+Un administrador desea obtener todos los envíos cuyos destinos no están en ciertas ciudades específicas.
+```sql
+
+```
+### Caso de Uso 9: Obtener Seguimientos de Paquetes en un Rango de Fechas
+Un administrador desea obtener todos los eventos de seguimiento de paquetes que ocurrieron dentro de un rango de fechas específico.
+```sql
+
+```
+### Caso de Uso 10: Obtener Clientes que Tienen Ciertos Tipos de Paquetes
+Un administrador desea obtener todos los clientes que tienen paquetes de ciertos tipos específicos (por ejemplo, 'nacional' o 'internacional').
+```sql
+
+```
