@@ -1,14 +1,11 @@
 -- insertar los tipos de estados en la tabla estados
-
 INSERT INTO estados(descripcion) VALUES 
 ('recibido'),
 ('en transito'),
 ('entregado'),
 ('retenido aduanas');
 
-
 -- insertar los tipos de servicio
-
 INSERT INTO tipo_servicio(descripcion) VALUES 
 ('nacional'),
 ('internacional'),
@@ -16,155 +13,149 @@ INSERT INTO tipo_servicio(descripcion) VALUES
 ('estandar');
 
 -- Insertar datos en la tabla paises
-INSERT INTO paises (pais_id, nombre) VALUES 
+INSERT INTO paises(pais_id, nombre) VALUES
 ('COL', 'Colombia'),
 ('USA', 'Estados Unidos'),
-('ARG', 'Argentina'),
-('BRA', 'Brasil'),
-('CHL', 'Chile');
+('MEX', 'México');
 
 -- Insertar datos en la tabla ciudades
-INSERT INTO ciudades (nombre, pais_id) VALUES 
+INSERT INTO ciudades(nombre, pais_id) VALUES
 ('Bogotá', 'COL'),
 ('Medellín', 'COL'),
-('Buenos Aires', 'ARG'),
-('Santiago', 'CHL'),
-('São Paulo', 'BRA');
+('New York', 'USA'),
+('Los Angeles', 'USA'),
+('Ciudad de México', 'MEX');
 
 -- Insertar datos en la tabla sucursales
-INSERT INTO sucursales (nombre, direccion, ciudad_id) VALUES 
-('Sucursal Bogotá Centro', 'Calle 123 #45-67', 1),
-('Sucursal Medellín Norte', 'Carrera 89 #34-56', 2),
-('Sucursal Buenos Aires', 'Av. Corrientes 1234', 3),
-('Sucursal Santiago Centro', 'Calle 456 #78-90', 4),
-('Sucursal São Paulo', 'Rua Paulista 789', 5);
+INSERT INTO sucursales(nombre, direccion, ciudad_id) VALUES
+('Sucursal 1', 'Calle 123, Bogotá', 1),
+('Sucursal 2', 'Carrera 45, Medellín', 2),
+('Sucursal 3', '5th Avenue, New York', 3),
+('Sucursal 4', 'Sunset Blvd, Los Angeles', 4),
+('Sucursal 5', 'Avenida Reforma, Ciudad de México', 5);
 
 -- Insertar datos en la tabla marca_vehiculo
-INSERT INTO marca_vehiculo (nombre) VALUES 
+INSERT INTO marca_vehiculo(nombre) VALUES
 ('Toyota'),
-('Nissan'),
-('Chevrolet'),
 ('Ford'),
-('Mercedes');
+('Chevrolet');
 
 -- Insertar datos en la tabla tipo_vehiculo
-INSERT INTO tipo_vehiculo (modelo, descripcion, marca_vehiculo_id) VALUES 
-('Hilux', 'Pickup', 1),
-('Navara', 'Pickup', 2),
-('Silverado', 'Pickup', 3),
-('F-150', 'Pickup', 4),
-('Sprinter', 'Van', 5);
+INSERT INTO tipo_vehiculo(modelo, descripcion, marca_vehiculo_id) VALUES
+('Hilux', 'Pick-up', 1),
+('F-150', 'Pick-up', 2),
+('Silverado', 'Pick-up', 3);
 
 -- Insertar datos en la tabla vehiculos
-INSERT INTO vehiculos (vehiculo_id, capacidad_carga, tipov_id, sucursal_id) VALUES 
-('MVN374', 1000.00, 1, 1),
-('FHG123', 1500.00, 2, 2),
-('QWE456', 2000.00, 3, 3),
-('TYU789', 2500.00, 4, 4),
-('ASD012', 3000.00, 5, 5);
+INSERT INTO vehiculos(vehiculo_id, capacidad_carga, tipov_id, sucursal_id) VALUES
+('ASD123', 1500.00, 1, 1), -- Placa de Colombia
+('BSD124', 1500.00, 2, 2), -- Placa de Colombia
+('XYZ789', 2000.00, 3, 3), -- Placa de USA
+('ABC456', 2000.00, 1, 4), -- Placa de USA
+('QWE567', 1000.00, 2, 5); -- Placa de México
 
 -- Insertar datos en la tabla conductores
-INSERT INTO conductores (conductor_id, nombre, sucursal_id) VALUES 
-('12345678A', 'Juan Pérez', 1),
-('87654321B', 'Luis Gómez', 2),
-('11223344C', 'Carlos Ramírez', 3),
-('44332211D', 'Ana Torres', 4),
-('55667788E', 'María López', 5);
+INSERT INTO conductores(conductor_id, nombre, sucursal_id) VALUES
+('123456789', 'Carlos Pérez', 1), -- DNI de Colombia
+('987654321', 'Juan Gómez', 2),  -- DNI de Colombia
+('456123789', 'John Doe', 3),    -- DNI de USA
+('789456123', 'Jane Smith', 4),  -- DNI de USA
+('321654987', 'Luis Rodríguez', 5); -- DNI de México
 
 -- Insertar datos en la tabla telefonos_conductores
-INSERT INTO telefonos_conductores (numero, conductor_id) VALUES 
-('3001234567', '12345678A'),
-('3012345678', '87654321B'),
-('3023456789', '11223344C'),
-('3034567890', '44332211D'),
-('3045678901', '55667788E');
+INSERT INTO telefonos_conductores(numero, conductor_id) VALUES
+('3001234567', '123456789'), -- Teléfono de Carlos Pérez
+('3101234567', '987654321'), -- Teléfono de Juan Gómez
+('5551234567', '456123789'), -- Teléfono de John Doe
+('5559876543', '789456123'), -- Teléfono de Jane Smith
+('5512345678', '321654987'); -- Teléfono de Luis Rodríguez
 
 -- Insertar datos en la tabla rutas
-INSERT INTO rutas (descripcion) VALUES 
-('Ruta 1: Bogotá a Medellín'),
-('Ruta 2: Buenos Aires a Santiago'),
-('Ruta 3: São Paulo a Buenos Aires'),
-('Ruta 4: Santiago a São Paulo'),
-('Ruta 5: Medellín a Bogotá');
+INSERT INTO rutas(descripcion, sucursal_id) VALUES
+('Ruta Bogotá-Medellín', 1),
+('Ruta Medellín-Bogotá', 2),
+('Ruta New York-Los Angeles', 3),
+('Ruta Los Angeles-New York', 4),
+('Ruta Ciudad de México-Bogotá', 5);
 
 -- Insertar datos en la tabla conductores_rutas
-INSERT INTO conductores_rutas (conductor_id, vehiculo_id, ruta_id, fecha_ruta) VALUES 
-('12345678A', 'MVN374', 1, '2023-01-01'),
-('87654321B', 'FHG123', 2, '2023-01-02'),
-('11223344C', 'QWE456', 3, '2023-01-03'),
-('44332211D', 'TYU789', 4, '2023-01-04'),
-('55667788E', 'ASD012', 5, '2023-01-05');
+INSERT INTO conductores_rutas(conductor_id, vehiculo_id, ruta_id, fecha_ruta) VALUES
+('123456789', 'ASD123', 1, '2024-06-01'),
+('987654321', 'BSD124', 2, '2024-06-02'),
+('456123789', 'XYZ789', 3, '2024-06-03'),
+('789456123', 'ABC456', 4, '2024-06-04'),
+('321654987', 'QWE567', 5, '2024-06-05');
 
 -- Insertar datos en la tabla auxiliares
-INSERT INTO auxiliares (auxiliar_id, nombre) VALUES 
-('23456789A', 'Pedro Sánchez'),
-('98765432B', 'Marta Díaz'),
-('22334455C', 'Luisa Fernández'),
-('55443322D', 'Jorge Ortiz'),
-('66778899E', 'Clara Rojas');
+INSERT INTO auxiliares(auxiliar_id, nombre) VALUES
+('1122334455', 'Ana Martínez'), -- DNI
+('2233445566', 'Luis Castro'),  -- DNI
+('3344556677', 'Maria López'),  -- DNI
+('4455667788', 'James Brown'),  -- DNI
+('5566778899', 'Patricia White'); -- DNI
 
 -- Insertar datos en la tabla telefonos_auxiliar
-INSERT INTO telefonos_auxiliar (numero, auxiliar_id) VALUES 
-('3056789012', '23456789A'),
-('3067890123', '98765432B'),
-('3078901234', '22334455C'),
-('3089012345', '55443322D'),
-('3090123456', '66778899E');
+INSERT INTO telefonos_auxiliar(numero, auxiliar_id) VALUES
+('3009876543', '1122334455'), -- Teléfono de Ana Martínez
+('3109876543', '2233445566'), -- Teléfono de Luis Castro
+('5559876543', '3344556677'), -- Teléfono de Maria López
+('5558765432', '4455667788'), -- Teléfono de James Brown
+('5512345678', '5566778899'); -- Teléfono de Patricia White
 
 -- Insertar datos en la tabla ruta_auxiliares
-INSERT INTO ruta_auxiliares (ruta_id, auxiliar_id) VALUES 
-(1, '23456789A'),
-(2, '98765432B'),
-(3, '22334455C'),
-(4, '55443322D'),
-(5, '66778899E');
+INSERT INTO ruta_auxiliares(ruta_id, auxiliar_id) VALUES
+(1, '1122334455'), -- Ruta 1 con Ana Martínez
+(2, '2233445566'), -- Ruta 2 con Luis Castro
+(3, '3344556677'), -- Ruta 3 con Maria López
+(4, '4455667788'), -- Ruta 4 con James Brown
+(5, '5566778899'); -- Ruta 5 con Patricia White
 
 -- Insertar datos en la tabla clientes
-INSERT INTO clientes (cliente_id, nombre, email, direccion) VALUES 
-('34567890A', 'Laura Martínez', 'laura.martinez@example.com', 'Calle 789 #12-34'),
-('09876543B', 'Daniel Castillo', 'daniel.castillo@example.com', 'Carrera 56 #78-90'),
-('33445566C', 'Sara González', 'sara.gonzalez@example.com', 'Av. Libertador 123'),
-('66554433D', 'Miguel Herrera', 'miguel.herrera@example.com', 'Calle 98 #76-54'),
-('77889900E', 'Sofía Ramírez', 'sofia.ramirez@example.com', 'Rua Brasil 456');
+INSERT INTO clientes(cliente_id, nombre, email, direccion) VALUES
+('1001001001', 'Empresa A', 'contacto@empresaa.com', 'Calle Falsa 123, Bogotá'), -- DNI
+('1002002002', 'Empresa B', 'contacto@empresab.com', 'Avenida Siempre Viva 742, Medellín'), -- DNI
+('2001001001', 'Empresa C', 'contacto@empresac.com', '123 Main St, New York'), -- DNI
+('2002002002', 'Empresa D', 'contacto@empresad.com', '456 Elm St, Los Angeles'), -- DNI
+('3001001001', 'Empresa E', 'contacto@empresae.com', 'Avenida Insurgentes 123, Ciudad de México'); -- DNI
 
 -- Insertar datos en la tabla telefonos_clientes
-INSERT INTO telefonos_clientes (cliente_id, numero) VALUES 
-('34567890A', '3101234567'),
-('09876543B', '3112345678'),
-('33445566C', '3123456789'),
-('66554433D', '3134567890'),
-('77889900E', '3145678901');
+INSERT INTO telefonos_clientes(cliente_id, numero) VALUES
+('1001001001', '3001112222'), -- Teléfono de Empresa A
+('1002002002', '3101112222'), -- Teléfono de Empresa B
+('2001001001', '5551112222'), -- Teléfono de Empresa C
+('2002002002', '5553334444'), -- Teléfono de Empresa D
+('3001001001', '5511112222'); -- Teléfono de Empresa E
 
 -- Insertar datos en la tabla paquetes
-INSERT INTO paquetes (peso, contenido, valor_declarado, tipo_servicio_id, largo, ancho, alto) VALUES 
-(5.00, 'Libros', 100.00, 1, 30.00, 20.00, 10.00),
-(10.00, 'Ropa', 200.00, 2, 40.00, 30.00, 20.00),
-(15.00, 'Electrónica', 500.00, 3, 50.00, 40.00, 30.00),
-(20.00, 'Muebles', 1000.00, 4, 60.00, 50.00, 40.00),
-(25.00, 'Alimentos', 150.00, 1, 70.00, 60.00, 50.00);
+INSERT INTO paquetes(peso, contenido, valor_declarado, tipo_servicio_id, largo, ancho, alto) VALUES
+(10.50, 'Electrónicos', 1500.00, 1, 50.00, 30.00, 20.00),
+(5.75, 'Ropa', 500.00, 2, 40.00, 20.00, 10.00),
+(20.00, 'Libros', 300.00, 3, 60.00, 40.00, 30.00),
+(15.25, 'Juguetes', 200.00, 4, 70.00, 50.00, 40.00),
+(8.00, 'Herramientas', 800.00, 1, 30.00, 20.00, 15.00);
 
 -- Insertar datos en la tabla envios
-INSERT INTO envios (envio_fecha, destino, cliente_id, paquete_id, ruta_id) VALUES 
-('2023-01-10', 'Medellín', '34567890A', 1, 1),
-('2023-01-15', 'Santiago', '09876543B', 2, 2),
-('2023-01-20', 'Buenos Aires', '33445566C', 3, 3),
-('2023-01-25', 'São Paulo', '66554433D', 4, 4),
-('2023-01-30', 'Bogotá', '77889900E', 5, 5);
+INSERT INTO envios(envio_fecha, destino, cliente_id, paquete_id, ruta_id) VALUES
+('2024-06-10', 'Calle 456, Medellín', '1001001001', 1, 1),
+('2024-06-11', 'Carrera 78, Bogotá', '1002002002', 2, 2),
+('2024-06-12', '789 Broadway, New York', '2001001001', 3, 3),
+('2024-06-13', '101 Hollywood Blvd, Los Angeles', '2002002002', 4, 4),
+('2024-06-14', 'Calle 789, Ciudad de México', '3001001001', 5, 5);
 
 -- Insertar datos en la tabla seguimiento
-INSERT INTO seguimiento (ubicacion, fecha_hora, paquete_id, estado_id) VALUES 
-('Bogotá', '2023-01-01 08:00:00', 1, 1),
-('Medellín', '2023-01-02 12:00:00', 1, 2),
-('Medellín', '2023-01-02 18:00:00', 1, 3),
-('Buenos Aires', '2023-01-10 08:00:00', 2, 1),
-('Santiago', '2023-01-15 12:00:00', 2, 2),
-('Santiago', '2023-01-15 18:00:00', 2, 3),
-('São Paulo', '2023-01-20 08:00:00', 3, 1),
-('Buenos Aires', '2023-01-25 12:00:00', 3, 2),
-('Buenos Aires', '2023-01-25 18:00:00', 3, 3),
-('Santiago', '2023-01-30 08:00:00', 4, 1),
-('São Paulo', '2023-02-02 12:00:00', 4, 2),
-('São Paulo', '2023-02-02 18:00:00', 4, 3),
-('Medellín', '2023-02-10 08:00:00', 5, 1),
-('Bogotá', '2023-02-12 12:00:00', 5, 2),
-('Bogotá', '2023-02-12 18:00:00', 5, 3);
+INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
+('Bogotá', '2024-06-10 08:00:00', 1, 1), -- Recibido en Bogotá
+('Medellín', '2024-06-10 12:00:00', 1, 2), -- En tránsito a Medellín
+('Medellín', '2024-06-11 09:00:00', 1, 3), -- Entregado en Medellín
+('Medellín', '2024-06-11 10:00:00', 2, 1), -- Recibido en Medellín
+('Bogotá', '2024-06-11 14:00:00', 2, 2), -- En tránsito a Bogotá
+('Bogotá', '2024-06-12 11:00:00', 2, 3), -- Entregado en Bogotá
+('New York', '2024-06-12 08:00:00', 3, 1), -- Recibido en New York
+('Los Angeles', '2024-06-12 16:00:00', 3, 2), -- En tránsito a Los Angeles
+('Los Angeles', '2024-06-13 10:00:00', 3, 3), -- Entregado en Los Angeles
+('Los Angeles', '2024-06-13 11:00:00', 4, 1), -- Recibido en Los Angeles
+('New York', '2024-06-13 18:00:00', 4, 2), -- En tránsito a New York
+('New York', '2024-06-14 12:00:00', 4, 3), -- Entregado en New York
+('Ciudad de México', '2024-06-14 08:00:00', 5, 1), -- Recibido en Ciudad de México
+('Bogotá', '2024-06-14 16:00:00', 5, 2), -- En tránsito a Bogotá
+('Bogotá', '2024-06-15 09:00:00', 5, 3); -- Entregado en Bogotá

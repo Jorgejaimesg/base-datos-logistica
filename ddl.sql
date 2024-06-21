@@ -67,7 +67,9 @@ CREATE TABLE telefonos_conductores (
 CREATE TABLE rutas (
     ruta_id INT AUTO_INCREMENT,
     descripcion TEXT,
-    CONSTRAINT PK_rutas PRIMARY KEY (ruta_id)
+    sucursal_id INT,
+    CONSTRAINT PK_rutas PRIMARY KEY (ruta_id),
+    CONSTRAINT FK_rutas_sucursal FOREIGN KEY (sucursal_id) REFERENCES sucursales(sucursal_id)
 );
 
 CREATE TABLE conductores_rutas (
