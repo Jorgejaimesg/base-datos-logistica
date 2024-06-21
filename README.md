@@ -129,7 +129,7 @@ INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
 
     SELECT 
     p.paquete_id AS Paquete_id,
-    e.descripcion AS descripcion
+    e.descripcion AS estado
     FROM paquetes p
     JOIN seguimiento s ON p.paquete_id = s.paquete_id
     JOIN estados e ON e.estado_id = s.estado_id
@@ -137,11 +137,11 @@ INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
     ORDER BY s.fecha_hora DESC
     LIMIT 1;
 
-    +------------+-------------+
-    | Paquete_id | descripcion |
-    +------------+-------------+
-    |          2 | entregado   |
-    +------------+-------------+
+    +------------+-----------+
+    | Paquete_id | estado    |
+    +------------+-----------+
+    |          2 | entregado |
+    +------------+-----------+
 ```
 ### Caso de Uso 17: Rastrear la Ubicación Actual de un Paquete
 Un administrador desea rastrear la ubicación actual de un paquete específico.
