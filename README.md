@@ -106,16 +106,19 @@ Un administrador desea registrar un evento de seguimiento para un paquete.
 ### Caso de Uso 15: Generar un Reporte de Envíos por Cliente
 Un administrador desea generar un reporte de todos los envíos realizados por un cliente específico.
 ```sql
-    SELECT e.envio_id AS envio_id
+
+    SELECT 
+    c.cliente_id AS cliente_id,
+    e.envio_id AS envio_id
     FROM envios e
     JOIN clientes c ON e.cliente_id = c.cliente_id
     WHERE c.cliente_id = '2002002002'; -- poner Id del cliente en este caso 2002002002
 
-    +----------+
-    | envio_id |
-    +----------+
-    |        4 |
-    +----------+
+    +------------+----------+
+    | cliente_id | envio_id |
+    +------------+----------+
+    | 2002002002 |        4 |
+    +------------+----------+
 ```
 
 ### Caso de Uso 16: Actualizar el Estado de un Paquete
