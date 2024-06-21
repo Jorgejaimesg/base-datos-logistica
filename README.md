@@ -124,24 +124,26 @@ Un administrador desea generar un reporte de todos los envíos realizados por un
 ### Caso de Uso 16: Actualizar el Estado de un Paquete
 Un administrador desea actualizar el estado de un paquete específico.
 ```sql
-INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
-('Bogotá', now(), 2, 3);
+    UPDATE seguimiento
+    SET 
+        estado_id=2,
+        fecha_hora=now(),
+        ubicacion='Bogota'
+    WHERE paquete_id=2;
 
     SELECT 
-    p.paquete_id AS Paquete_id,
-    e.descripcion AS estado
+        p.paquete_id AS Paquete_id,
+        e.descripcion AS estado
     FROM paquetes p
     JOIN seguimiento s ON p.paquete_id = s.paquete_id
     JOIN estados e ON e.estado_id = s.estado_id
-    WHERE p.paquete_id = 2
-    ORDER BY s.fecha_hora DESC
-    LIMIT 1;
+    WHERE p.paquete_id = 2;
 
-    +------------+-----------+
-    | Paquete_id | estado    |
-    +------------+-----------+
-    |          2 | entregado |
-    +------------+-----------+
+    +------------+-------------+
+    | Paquete_id | estado      |
+    +------------+-------------+
+    |          2 | en transito |
+    +------------+-------------+
 ```
 ### Caso de Uso 17: Rastrear la Ubicación Actual de un Paquete
 Un administrador desea rastrear la ubicación actual de un paquete específico.
@@ -152,8 +154,6 @@ Un administrador desea rastrear la ubicación actual de un paquete específico.
     FROM seguimiento s
     JOIN paquetes p ON s.paquete_id = p.paquete_id
     WHERE p.paquete_id = 2
-    ORDER BY s.fecha_hora DESC
-    LIMIT 1;
 
     +------------+-----------+
     | Paquete_id | ubicación |
@@ -166,6 +166,44 @@ Un administrador desea rastrear la ubicación actual de un paquete específico.
 ### Caso de Uso 1: Obtener Información Completa de Envíos
 Un administrador desea obtener la información completa de todos los envíos, incluyendo detalles del cliente, paquete, ruta, conductor, y sucursal.
 ```sql
+    SELECT
+    e.envio_id AS ID_envio,
+    e.envio_fecha AS Fecha_de_envio,
+    e.destino AS Destino,
+    e.cliente_id AS ID_Cliente,
+    c.nombre AS Nombre_cliente,
+    c.email AS Email_cliente,
+    e.paquete_id AS ID_paquete,
+    p.peso AS Peso_paquete,
+    p.contenido AS Contenido_Paquete,
+    p.valor_declarado AS Valor_Declarado,
+    s.seguimiento_id AS Numero_seguimiento,
+    tp.descripcion AS Tipo_servicio,
+    es.descripcion AS Estado,
+    e.ruta_id AS ID_ruta,
+    cr.conductor_id as ID_conductor,
+    co.nombre AS Nombre_conductor,
+    cr.vehiculo_id as Matricula_vehiculo
+    FROM
+    envios e
+
+    JOIN clientes c ON c.cliente_id=e.cliente_id
+    JOIN conductores_rutas cr ON e.ruta_id=cr.ruta_id
+    JOIN conductores co ON cr.conductor_id=co.conductor_id
+    JOIN paquetes p ON e.paquete_id=p.paquete_id
+    JOIN tipo_servicio tp ON p.tipo_servicio_id=tp.tipo_servicio_id
+    JOIN seguimiento s ON s.paquete_id=p.paquete_id
+    JOIN estados as es ON es.estado_id=s.estado_id
+
+    +----------+----------------+---------------------------------+------------+----------------+-----------------------+------------+--------------+-------------------+-----------------+--------------------+---------------+-------------+---------+--------------+------------------+--------------------+
+| ID_envio | Fecha_de_envio | Destino                         | ID_Cliente | Nombre_cliente | Email_cliente         | ID_paquete | Peso_paquete | Contenido_Paquete | Valor_Declarado | Numero_seguimiento | Tipo_servicio | Estado      | ID_ruta | ID_conductor | Nombre_conductor | Matricula_vehiculo |
++----------+----------------+---------------------------------+------------+----------------+-----------------------+------------+--------------+-------------------+-----------------+--------------------+---------------+-------------+---------+--------------+------------------+--------------------+
+|        1 | 2024-06-10     | Calle 456, Medellín             | 1001001001 | Empresa A      | contacto@empresaa.com |          1 |        10.50 | Electrónicos      |         1500.00 |                 19 | nacional      | recibido    |       1 | 123456789    | Carlos Pérez     | ASD123             |
+|        2 | 2024-06-11     | Carrera 78, Bogotá              | 1002002002 | Empresa B      | contacto@empresab.com |          2 |         5.75 | Ropa              |          500.00 |                 20 | internacional | en transito |       2 | 987654321    | Juan Gómez       | BSD124             |
+|        3 | 2024-06-12     | 789 Broadway, New York          | 2001001001 | Empresa C      | contacto@empresac.com |          3 |        20.00 | Libros            |          300.00 |                 21 | expres        | recibido    |       3 | 456123789    | John Doe         | XYZ789             |
+|        4 | 2024-06-13     | 101 Hollywood Blvd, Los Angeles | 2002002002 | Empresa D      | contacto@empresad.com |          4 |        15.25 | Juguetes          |          200.00 |                 22 | estandar      | recibido    |       4 | 789456123    | Jane Smith       | ABC456             |
+|        5 | 2024-06-14     | Calle 789, Ciudad de México     | 3001001001 | Empresa E      | contacto@empresae.com |          5 |         8.00 | Herramientas      |          800.00 |                 23 | nacional      | recibido    |       5 | 321654987    | Luis Rodríguez   | QWE567             |
++----------+----------------+---------------------------------+------------+----------------+-----------------------+------------+--------------+-------------------+-----------------+--------------------+---------------+-------------+---------+--------------+------------------+--------------------+
 
 ```
 ### Caso de Uso 2: Obtener Historial de Envíos de un Cliente
