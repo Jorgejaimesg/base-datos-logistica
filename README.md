@@ -265,7 +265,7 @@ Un administrador desea obtener una lista de todos los conductores y las rutas a 
     | 321654987    | Luis Rodríguez |        5 |    5 | QWE567             |         1000.00 | F-150     | Pick-up     | Ford           |
     | 456123789    | John Doe       |        3 |    3 | XYZ789             |         2000.00 | Silverado | Pick-up     | Chevrolet      |
     +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
-    ```
+```
 ## Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
 Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
 ```sql
