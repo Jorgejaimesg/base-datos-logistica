@@ -209,12 +209,63 @@ Un administrador desea obtener la información completa de todos los envíos, in
 ### Caso de Uso 2: Obtener Historial de Envíos de un Cliente
 Un administrador desea obtener el historial completo de envíos de un cliente específico, incluyendo detalles de los paquetes y los eventos de seguimiento.
 ```sql
+    SELECT 
+        e.envio_id AS ID_envio,
+        e.cliente_id AS Cliente ,
+        e.destino AS Destino,
+        e.paquete_id AS Paquete,
+        s.seguimiento_id AS Numero_seguimiento,
+        s.fecha_hora AS Fecha,
+        s.ubicacion  AS Ubicacion,
+        es.descripcion AS estado
+    FROM envios e
+    JOIN paquetes p ON e.paquete_id = p.paquete_id
+    JOIN seguimiento s ON p.paquete_id = s.paquete_id
+    JOIN estados es ON es.estado_id=s.estado_id
+    WHERE 
+        e.cliente_id = 2002002002 -- cliente espscifico con ese id
+    ORDER BY 
+        s.fecha_hora DESC;
 
++----------+------------+---------------------------------+---------+--------------------+---------------------+-------------+----------+
+| ID_envio | Cliente    | Destino                         | Paquete | Numero_seguimiento | Fecha               | Ubicacion   | estado   |
++----------+------------+---------------------------------+---------+--------------------+---------------------+-------------+----------+
+|        4 | 2002002002 | 101 Hollywood Blvd, Los Angeles |       4 |                 22 | 2024-06-13 11:00:00 | Los Angeles | recibido |
++----------+------------+---------------------------------+---------+--------------------+---------------------+-------------+----------+
 ```
 ### Caso de Uso 3: Listar Conductores y sus Rutas Asignadas
 Un administrador desea obtener una lista de todos los conductores y las rutas a las que están asignados, incluyendo detalles del vehículo utilizado y la sucursal correspondiente.
 ```sql
+    SELECT
+    c.conductor_id AS ID_conductor,
+    c.nombre AS Nombre,
+    c.sucursal_id AS Sucursal,
+    cr.ruta_id AS Ruta,
+    cr.vehiculo_id AS Matricula_vehiculo,
+    v.capacidad_carga AS Capacidad_Carga,
+    tv.modelo,
+    tv.descripcion,
+    mv.nombre AS Marca_Vehiculo
 
+
+    FROM
+    conductores c 
+    JOIN conductores_rutas cr ON c.conductor_id=cr.conductor_id
+    JOIN vehiculos v ON cr.vehiculo_id=v.vehiculo_id
+    JOIN tipo_vehiculo tv ON v.tipov_id=tv.tipov_id
+    JOIN marca_vehiculo mv ON tv.marca_vehiculo_id=mv.marca_vehiculo_id
+    
+    +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
+| ID_conductor | Nombre         | Sucursal | Ruta | Matricula_vehiculo | Capacidad_Carga | modelo    | descripcion | Marca_Vehiculo |
++--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
+| 123456789    | Carlos Pérez   |        1 |    1 | ASD123             |
+     1500.00 | Hilux     | Pick-up     | Toyota         |
+| 987654321    | Juan Gómez     |        2 |    2 | BSD124             |         1500.00 | F-150     | Pick-up     | Ford           |
+| 456123789    | John Doe       |        3 |    3 | XYZ789             |         2000.00 | Silverado | Pick-up     | Chevrolet      |
+| 789456123    | Jane Smith     |        4 |    4 | ABC456             |         2000.00 | Hilux     | Pick-up     | Toyota         |
+| 321654987    | Luis Rodríguez |        5 |    5 | QWE567             |         1000.00 | F-150     | Pick-up     | Ford           |
+| 1005338579   | Jorge Jaimes   |        6 |    6 | MVN372             |         1000.20 | Hilux     | Pick-up     | Toyota         |
++--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
 ```
 ## Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
 Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
