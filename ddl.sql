@@ -72,7 +72,7 @@ CREATE TABLE rutas (
 
 CREATE TABLE conductores_rutas (
     conductor_id VARCHAR(20),
-    vehiculo_id INT,
+    vehiculo_id VARCHAR(10),
     ruta_id INT,
     fecha_ruta DATE,
     CONSTRAINT PK_conductores_rutas PRIMARY KEY (fecha_ruta),
