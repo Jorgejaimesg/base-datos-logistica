@@ -13,7 +13,9 @@ control de sucursales, vehículos, chóferes y asistentes de distribución, así
 
 ### Caso de Uso 1: 
 Registrar un Nuevo País
-Descripción: Un administrador desea agregar un nuevo país a la base de datos.
+
+
+Un administrador desea agregar un nuevo país a la base de datos.
 
  ```sql
 INSERT INTO paises (pais_id, nombre) VALUES 
