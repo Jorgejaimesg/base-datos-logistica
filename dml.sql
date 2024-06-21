@@ -149,7 +149,6 @@ INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
 ('Medellín', '2024-06-11 09:00:00', 1, 3), -- Entregado en Medellín
 ('Medellín', '2024-06-11 10:00:00', 2, 1), -- Recibido en Medellín
 ('Bogotá', '2024-06-11 14:00:00', 2, 2), -- En tránsito a Bogotá
-('Bogotá', '2024-06-12 11:00:00', 2, 3), -- Entregado en Bogotá
 ('New York', '2024-06-12 08:00:00', 3, 1), -- Recibido en New York
 ('Los Angeles', '2024-06-12 16:00:00', 3, 2), -- En tránsito a Los Angeles
 ('Los Angeles', '2024-06-13 10:00:00', 3, 3), -- Entregado en Los Angeles

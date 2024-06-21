@@ -40,7 +40,7 @@ existente.
 Un administrador desea registrar un nuevo cliente en la base de datos.
 ```sql
     INSERT INTO clientes(cliente_id, nombre, email, direccion) VALUES
-('1005338578', 'Jorge', 'Jorge@cliente.com', 'Calle 111-22b, Bogotá');
+    ('1005338578', 'Jorge', 'Jorge@cliente.com', 'Calle 111-22b, Bogotá');
 ```
 ### Caso de Uso 5: Registrar un Nuevo Teléfono para un Cliente
 Un administrador desea agregar un número de teléfono para un cliente existente.
@@ -106,15 +106,56 @@ Un administrador desea registrar un evento de seguimiento para un paquete.
 ### Caso de Uso 15: Generar un Reporte de Envíos por Cliente
 Un administrador desea generar un reporte de todos los envíos realizados por un cliente específico.
 ```sql
+    SELECT e.envio_id AS envio_id
+    FROM envios e
+    JOIN clientes c ON e.cliente_id = c.cliente_id
+    WHERE c.cliente_id = '2002002002'; -- poner Id del cliente en este caso 2002002002
 
+    +----------+
+    | envio_id |
+    +----------+
+    |        4 |
+    +----------+
 ```
+
 ### Caso de Uso 16: Actualizar el Estado de un Paquete
 Un administrador desea actualizar el estado de un paquete específico.
 ```sql
+INSERT INTO seguimiento(ubicacion, fecha_hora, paquete_id, estado_id) VALUES
+('Bogotá', now(), 2, 3);
 
+    SELECT 
+    p.paquete_id AS Paquete_id,
+    e.descripcion AS descripcion
+    FROM paquetes p
+    JOIN seguimiento s ON p.paquete_id = s.paquete_id
+    JOIN estados e ON e.estado_id = s.estado_id
+    WHERE p.paquete_id = 2
+    ORDER BY s.fecha_hora DESC
+    LIMIT 1;
+
+    +------------+-------------+
+    | Paquete_id | descripcion |
+    +------------+-------------+
+    |          2 | entregado   |
+    +------------+-------------+
 ```
 ### Caso de Uso 17: Rastrear la Ubicación Actual de un Paquete
 Un administrador desea rastrear la ubicación actual de un paquete específico.
 ```sql
+    SELECT 
+    p.paquete_id AS Paquete_id,
+    s.ubicacion AS ubicación
+    FROM seguimiento s
+    JOIN paquetes p ON s.paquete_id = p.paquete_id
+    WHERE p.paquete_id = 2
+    ORDER BY s.fecha_hora DESC
+    LIMIT 1;
+
+    +------------+-----------+
+    | Paquete_id | ubicación |
+    +------------+-----------+
+    |          2 | Bogotá    |
+    +------------+-----------+
 
 ```
