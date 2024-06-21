@@ -108,11 +108,14 @@ Un administrador desea generar un reporte de todos los envíos realizados por un
 ```sql
 
     SELECT 
-    c.cliente_id AS cliente_id,
-    e.envio_id AS envio_id
-    FROM envios e
-    JOIN clientes c ON e.cliente_id = c.cliente_id
-    WHERE c.cliente_id = '2002002002'; -- poner Id del cliente en este caso 2002002002
+        c.cliente_id AS cliente_id,
+        e.envio_id AS envio_id
+    FROM 
+        envios e
+    JOIN 
+        clientes c ON e.cliente_id = c.cliente_id
+    WHERE 
+        c.cliente_id = '2002002002'; -- poner Id del cliente en este caso 2002002002
 
     +------------+----------+
     | cliente_id | envio_id |
@@ -124,20 +127,26 @@ Un administrador desea generar un reporte de todos los envíos realizados por un
 ### Caso de Uso 16: Actualizar el Estado de un Paquete
 Un administrador desea actualizar el estado de un paquete específico.
 ```sql
-    UPDATE seguimiento
+    UPDATE 
+        seguimiento
     SET 
         estado_id=2,
         fecha_hora=now(),
         ubicacion='Bogota'
-    WHERE paquete_id=2;
+    WHERE 
+        paquete_id=2;
 
     SELECT 
         p.paquete_id AS Paquete_id,
         e.descripcion AS estado
-    FROM paquetes p
-    JOIN seguimiento s ON p.paquete_id = s.paquete_id
-    JOIN estados e ON e.estado_id = s.estado_id
-    WHERE p.paquete_id = 2;
+    FROM 
+        paquetes p
+    JOIN 
+        seguimiento s ON p.paquete_id = s.paquete_id
+    JOIN 
+        estados e ON e.estado_id = s.estado_id
+    WHERE 
+        p.paquete_id = 2;
 
     +------------+-------------+
     | Paquete_id | estado      |
@@ -149,11 +158,14 @@ Un administrador desea actualizar el estado de un paquete específico.
 Un administrador desea rastrear la ubicación actual de un paquete específico.
 ```sql
     SELECT 
-    p.paquete_id AS Paquete_id,
-    s.ubicacion AS ubicación
-    FROM seguimiento s
-    JOIN paquetes p ON s.paquete_id = p.paquete_id
-    WHERE p.paquete_id = 2
+        p.paquete_id AS Paquete_id,
+        s.ubicacion AS ubicación
+    FROM 
+        seguimiento s
+    JOIN 
+        paquetes p ON s.paquete_id = p.paquete_id
+    WHERE 
+        p.paquete_id = 2
 
     +------------+-----------+
     | Paquete_id | ubicación |
@@ -167,33 +179,39 @@ Un administrador desea rastrear la ubicación actual de un paquete específico.
 Un administrador desea obtener la información completa de todos los envíos, incluyendo detalles del cliente, paquete, ruta, conductor, y sucursal.
 ```sql
     SELECT
-    e.envio_id AS ID_envio,
-    e.envio_fecha AS Fecha_de_envio,
-    e.destino AS Destino,
-    e.cliente_id AS ID_Cliente,
-    c.nombre AS Nombre_cliente,
-    c.email AS Email_cliente,
-    e.paquete_id AS ID_paquete,
-    p.peso AS Peso_paquete,
-    p.contenido AS Contenido_Paquete,
-    p.valor_declarado AS Valor_Declarado,
-    s.seguimiento_id AS Numero_seguimiento,
-    tp.descripcion AS Tipo_servicio,
-    es.descripcion AS Estado,
-    e.ruta_id AS ID_ruta,
-    cr.conductor_id as ID_conductor,
-    co.nombre AS Nombre_conductor,
-    cr.vehiculo_id as Matricula_vehiculo
+        e.envio_id AS ID_envio,
+        e.envio_fecha AS Fecha_de_envio,
+        e.destino AS Destino,
+        e.cliente_id AS ID_Cliente,
+        c.nombre AS Nombre_cliente,
+        c.email AS Email_cliente,
+        e.paquete_id AS ID_paquete,
+        p.peso AS Peso_paquete,
+        p.contenido AS Contenido_Paquete,
+        p.valor_declarado AS Valor_Declarado,
+        s.seguimiento_id AS Numero_seguimiento,
+        tp.descripcion AS Tipo_servicio,
+        es.descripcion AS Estado,
+        e.ruta_id AS ID_ruta,
+        cr.conductor_id as ID_conductor,
+        co.nombre AS Nombre_conductor,
+        cr.vehiculo_id as Matricula_vehiculo
     FROM
-    envios e
-
-    JOIN clientes c ON c.cliente_id=e.cliente_id
-    JOIN conductores_rutas cr ON e.ruta_id=cr.ruta_id
-    JOIN conductores co ON cr.conductor_id=co.conductor_id
-    JOIN paquetes p ON e.paquete_id=p.paquete_id
-    JOIN tipo_servicio tp ON p.tipo_servicio_id=tp.tipo_servicio_id
-    JOIN seguimiento s ON s.paquete_id=p.paquete_id
-    JOIN estados as es ON es.estado_id=s.estado_id
+        envios e
+    JOIN 
+        clientes c ON c.cliente_id=e.cliente_id
+    JOIN 
+        conductores_rutas cr ON e.ruta_id=cr.ruta_id
+    JOIN 
+        conductores co ON cr.conductor_id=co.conductor_id
+    JOIN 
+        paquetes p ON e.paquete_id=p.paquete_id
+    JOIN 
+        tipo_servicio tp ON p.tipo_servicio_id=tp.tipo_servicio_id
+    JOIN 
+        seguimiento s ON s.paquete_id=p.paquete_id
+    JOIN 
+        estados as es ON es.estado_id=s.estado_id
 
     +----------+----------------+---------------------------------+------------+----------------+-----------------------+------------+--------------+-------------------+-----------------+--------------------+---------------+-------------+---------+--------------+------------------+--------------------+
     | ID_envio | Fecha_de_envio | Destino                         | ID_Cliente | Nombre_cliente | Email_cliente         | ID_paquete | Peso_paquete | Contenido_Paquete | Valor_Declarado | Numero_seguimiento | Tipo_servicio | Estado      | ID_ruta | ID_conductor | Nombre_conductor | Matricula_vehiculo |
@@ -218,10 +236,14 @@ Un administrador desea obtener el historial completo de envíos de un cliente es
         s.fecha_hora AS Fecha,
         s.ubicacion  AS Ubicacion,
         es.descripcion AS estado
-    FROM envios e
-    JOIN paquetes p ON e.paquete_id = p.paquete_id
-    JOIN seguimiento s ON p.paquete_id = s.paquete_id
-    JOIN estados es ON es.estado_id=s.estado_id
+    FROM 
+        envios e
+    JOIN 
+        paquetes p ON e.paquete_id = p.paquete_id
+    JOIN 
+        seguimiento s ON p.paquete_id = s.paquete_id
+    JOIN 
+        estados es ON es.estado_id=s.estado_id
     WHERE 
         e.cliente_id = 2002002002 -- cliente espscifico con ese id
     ORDER BY 
@@ -237,23 +259,27 @@ Un administrador desea obtener el historial completo de envíos de un cliente es
 Un administrador desea obtener una lista de todos los conductores y las rutas a las que están asignados, incluyendo detalles del vehículo utilizado y la sucursal correspondiente.
 ```sql
     SELECT
-    c.conductor_id AS ID_conductor,
-    c.nombre AS Nombre,
-    c.sucursal_id AS Sucursal,
-    cr.ruta_id AS Ruta,
-    cr.vehiculo_id AS Matricula_vehiculo,
-    v.capacidad_carga AS Capacidad_Carga,
-    tv.modelo,
-    tv.descripcion,
-    mv.nombre AS Marca_Vehiculo
+        c.conductor_id AS ID_conductor,
+        c.nombre AS Nombre,
+        c.sucursal_id AS Sucursal,
+        cr.ruta_id AS Ruta,
+        cr.vehiculo_id AS Matricula_vehiculo,
+        v.capacidad_carga AS Capacidad_Carga,
+        tv.modelo,
+        tv.descripcion,
+        mv.nombre AS Marca_Vehiculo
 
 
     FROM
-    conductores c 
-    JOIN conductores_rutas cr ON c.conductor_id=cr.conductor_id
-    JOIN vehiculos v ON cr.vehiculo_id=v.vehiculo_id
-    JOIN tipo_vehiculo tv ON v.tipov_id=tv.tipov_id
-    JOIN marca_vehiculo mv ON tv.marca_vehiculo_id=mv.marca_vehiculo_id
+        conductores c 
+    JOIN 
+        conductores_rutas cr ON c.conductor_id=cr.conductor_id
+    JOIN 
+        vehiculos v ON cr.vehiculo_id=v.vehiculo_id
+    JOIN 
+        tipo_vehiculo tv ON v.tipov_id=tv.tipov_id
+    JOIN 
+        marca_vehiculo mv ON tv.marca_vehiculo_id=mv.marca_vehiculo_id
     
     +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
     | ID_conductor | Nombre         | Sucursal | Ruta | Matricula_vehiculo | Capacidad_Carga | modelo    | descripcion | Marca_Vehiculo |
@@ -270,14 +296,17 @@ Un administrador desea obtener una lista de todos los conductores y las rutas a 
 Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
 ```sql
     SELECT 
-    ra.ruta_id AS Ruta_id,
-    r.descripcion AS Descripcion,
-    ra.auxiliar_id AS Auxiliar_id,
-    a.nombre AS Nombre_auxiliar
+        ra.ruta_id AS Ruta_id,
+        r.descripcion AS Descripcion,
+        ra.auxiliar_id AS Auxiliar_id,
+        a.nombre AS Nombre_auxiliar
     
-    FROM ruta_auxiliares ra
-    JOIN rutas r ON ra.ruta_id=r.ruta_id
-    JOIN auxiliares a ON ra.auxiliar_id=a.auxiliar_id
+    FROM 
+        ruta_auxiliares ra
+    JOIN 
+        rutas r ON ra.ruta_id=r.ruta_id
+    JOIN 
+        auxiliares a ON ra.auxiliar_id=a.auxiliar_id
 
     +---------+------------------------------+-------------+-----------------+
     | Ruta_id | Descripcion                  | Auxiliar_id | Nombre_auxiliar |
@@ -373,50 +402,272 @@ WHERE
 ### Caso de Uso 1: Obtener Paquetes Enviados Dentro de un Rango de Fechas
 Un administrador desea obtener todos los paquetes que fueron enviados dentro de un rango de fechas específico.
 ```sql
+SELECT 
+    p.paquete_id,
+    p.contenido,
+    p.peso,
+    p.valor_declarado,
+    e.envio_fecha,
+    c.nombre AS cliente,
+    e.destino
+FROM 
+    paquetes p
+JOIN 
+    envios e ON p.paquete_id = e.paquete_id
+JOIN 
+    clientes c ON e.cliente_id = c.cliente_id
+WHERE 
+    e.envio_fecha BETWEEN '2024-06-11' AND '2024-06-13';
+
+    +------------+-----------+-------+-----------------+-------------+-----------+---------------------------------+
+| paquete_id | contenido | peso  | valor_declarado | envio_fecha | cliente   | destino                         |
++------------+-----------+-------+-----------------+-------------+-----------+---------------------------------+
+|          2 | Ropa      |  5.75 |          500.00 | 2024-06-11  | Empresa B | Carrera 78, Bogotá              |
+|          3 | Libros    | 20.00 |          300.00 | 2024-06-12  | Empresa C | 789 Broadway, New York          |
+|          4 | Juguetes  | 15.25 |          200.00 | 2024-06-13  | Empresa D | 101 Hollywood Blvd, Los Angeles |
++------------+-----------+-------+-----------------+-------------+-----------+---------------------------------+
 
 ```
 ### Caso de Uso 2: Obtener Paquetes con Ciertos Estados
 Un administrador desea obtener todos los paquetes que tienen ciertos estados específicos (por ejemplo, 'en tránsito' o 'entregado').
 ```sql
+SELECT 
+    p.paquete_id,
+    p.contenido,
+    p.peso,
+    p.valor_declarado,
+    e.descripcion AS estado
+FROM 
+    paquetes p
+JOIN 
+    seguimiento s ON p.paquete_id = s.paquete_id
+JOIN 
+    estados e ON s.estado_id = e.estado_id
+WHERE 
+    e.descripcion IN ('en transito', 'entregado');
+
+    +------------+-----------+------+-----------------+-------------+
+    | paquete_id | contenido | peso | valor_declarado | estado      |
+    +------------+-----------+------+-----------------+-------------+
+    |          2 | Ropa      | 5.75 |          500.00 | en transito |
+    +------------+-----------+------+-----------------+-------------+
 
 ```
 ### Caso de Uso 3: Obtener Paquetes Excluyendo Ciertos Estados
 Un administrador desea obtener todos los paquetes excluyendo aquellos que tienen ciertos estados específicos (por ejemplo, 'recibido' o 'retenido en aduana').
 ```sql
+SELECT 
+    p.paquete_id,
+    p.contenido,
+    p.peso,
+    p.valor_declarado,
+    e.descripcion AS estado
+FROM 
+    paquetes p
+JOIN 
+    seguimiento s ON p.paquete_id = s.paquete_id
+JOIN 
+    estados e ON s.estado_id = e.estado_id
+WHERE 
+    e.descripcion NOT IN ('en transito', 'retenido aduanas');
+    +------------+--------------+-------+-----------------+----------+
+    | paquete_id | contenido    | peso  | valor_declarado | estado   |
+    +------------+--------------+-------+-----------------+----------+
+    |          5 | Herramientas |  8.00 |          800.00 | recibido |
+    |          4 | Juguetes     | 15.25 |          200.00 | recibido |
+    |          3 | Libros       | 20.00 |          300.00 | recibido |
+    |          1 | Electrónicos | 10.50 |         1500.00 | recibido |
+    +------------+--------------+-------+-----------------+----------+
 
 ```
 ### Caso de Uso 4: Obtener Clientes con Envíos Realizados Dentro de un Rango de Fechas
 Un administrador desea obtener todos los clientes que realizaron envíos dentro de un rango de fechas específico.
 ```sql
+SELECT 
+    c.cliente_id,
+    c.nombre,
+    c.email,
+    c.direccion
+FROM 
+    clientes c
+JOIN 
+    envios e ON c.cliente_id = e.cliente_id
+WHERE 
+    e.envio_fecha BETWEEN '2024-06-10' AND '2024-06-30';
 
++------------+-----------+-----------------------+-------------------------------------------+
+| cliente_id | nombre    | email                 | direccion
+    |
++------------+-----------+-----------------------+-------------------------------------------+
+| 1001001001 | Empresa A | contacto@empresaa.com | Calle Falsa 123, Bogotá
+    |
+| 1002002002 | Empresa B | contacto@empresab.com | Avenida Siempre Viva 742, Medellín        |
+| 2001001001 | Empresa C | contacto@empresac.com | 123 Main St, New York
+    |
+| 2002002002 | Empresa D | contacto@empresad.com | 456 Elm St, Los Angeles                   |
+| 3001001001 | Empresa E | contacto@empresae.com | Avenida Insurgentes 123, Ciudad de México |
++------------+-----------+-----------------------+-------------------------------------------+
 ```
 ### Caso de Uso 5: Obtener Conductores Disponibles que No Están Asignados a Ciertas Rutas
 Un administrador desea obtener todos los conductores que no están asignados a ciertas rutas específicas.
 ```sql
+SELECT 
+    c.conductor_id,
+    c.nombre,
+    s.nombre AS sucursal
+FROM 
+    conductores c
+JOIN 
+    sucursales s ON c.sucursal_id = s.sucursal_id
+WHERE 
+    c.conductor_id NOT IN (
+        SELECT 
+            cr.conductor_id
+        FROM 
+            conductores_rutas cr
+        WHERE 
+            cr.ruta_id IN (1, 2, 3, 4, 5)
+            AND cr.fecha_ruta = '2024-06-05' -- fecha para mirar disponibilidad
+    );
+
++--------------+--------------+----------------+
+| conductor_id | nombre       | sucursal       |
++--------------+--------------+----------------+
+| 1005338579   | Jorge Jaimes | Sucursal 1Peru |
+| 123456789    | Carlos Pérez | Sucursal 1     |
+| 456123789    | John Doe     | Sucursal 3     |
+| 789456123    | Jane Smith   | Sucursal 4     |
+| 987654321    | Juan Gómez   | Sucursal 2     |
++--------------+--------------+----------------+
 
 ```
 ### Caso de Uso 6: Obtener Información de Paquetes con Valor Declarado Dentro de un Rango Específico
 Un administrador desea obtener todos los paquetes cuyo valor declarado está dentro de un rango específico.
 ```sql
+SELECT 
+    p.paquete_id,
+    p.contenido,
+    p.peso,
+    p.valor_declarado,
+    p.largo,
+    p.ancho,
+    p.alto
+FROM 
+    paquetes p
+WHERE 
+    p.valor_declarado BETWEEN 100 AND 1000;
 
++------------+--------------+-------+-----------------+-------+-------+-------+
+| paquete_id | contenido    | peso  | valor_declarado | largo | ancho | alto  |
++------------+--------------+-------+-----------------+-------+-------+-------+
+|          2 | Ropa         |  5.75 |          500.00 | 40.00 | 20.00 | 10.00 |
+|          3 | Libros       | 20.00 |          300.00 | 60.00 | 40.00 | 30.00 |
+|          4 | Juguetes     | 15.25 |          200.00 | 70.00 | 50.00 | 40.00 |
+|          5 | Herramientas |  8.00 |          800.00 | 30.00 | 20.00 | 15.00 |
++------------+--------------+-------+-----------------+-------+-------+-------+
 ```
 ### Caso de Uso 7: Obtener Auxiliares Asignados a Rutas Específicas
 Un administrador desea obtener todos los auxiliares de reparto que están asignados a ciertas rutas específicas.
 ```sql
+SELECT 
+    a.auxiliar_id,
+    a.nombre,
+    ra.ruta_id
+FROM 
+    auxiliares a
+JOIN 
+    ruta_auxiliares ra ON a.auxiliar_id = ra.auxiliar_id
+WHERE 
+    ra.ruta_id IN (1, 2); -- Lista de rutas específicas
+
++-------------+--------------+---------+
+| auxiliar_id | nombre       | ruta_id |
++-------------+--------------+---------+
+| 1122334455  | Ana Martínez |       1 |
+| 2233445566  | Luis Castro  |       2 |
++-------------+--------------+---------+
 
 ```
 ### Caso de Uso 8: Obtener Envíos a Destinos Excluyendo Ciertas Ciudades
 Un administrador desea obtener todos los envíos cuyos destinos no están en ciertas ciudades específicas.
 ```sql
+    SELECT 
+    e.envio_id,
+    e.envio_fecha,
+    e.destino,
+    c.nombre AS cliente,
+    p.contenido,
+    p.peso
+FROM 
+    envios e
+JOIN 
+    clientes c ON e.cliente_id = c.cliente_id
+JOIN 
+    paquetes p ON e.paquete_id = p.paquete_id
+WHERE 
+    e.destino NOT LIKE '%Bogotá' 
+    AND e.destino NOT LIKE '%Medellín' 
+    AND e.destino NOT LIKE '%New York'; -- la ciudad se pone al final del destino
 
++----------+-------------+---------------------------------+-----------+--------------+-------+
+| envio_id | envio_fecha | destino                         | cliente   | contenido    | peso  |
++----------+-------------+---------------------------------+-----------+--------------+-------+
+|        4 | 2024-06-13  | 101 Hollywood Blvd, Los Angeles | Empresa D | Juguetes     | 15.25 |
+|        5 | 2024-06-14  | Calle 789, Ciudad de México     | Empresa E | Herramientas |  8.00 |
++----------+-------------+---------------------------------+-----------+--------------+-------+
 ```
 ### Caso de Uso 9: Obtener Seguimientos de Paquetes en un Rango de Fechas
 Un administrador desea obtener todos los eventos de seguimiento de paquetes que ocurrieron dentro de un rango de fechas específico.
 ```sql
+SELECT 
+    s.seguimiento_id,
+    s.ubicacion,
+    s.fecha_hora,
+    p.paquete_id,
+    e.descripcion AS estado
+FROM 
+    seguimiento s
+JOIN 
+    paquetes p ON s.paquete_id = p.paquete_id
+JOIN 
+    estados e ON s.estado_id = e.estado_id
+WHERE 
+    s.fecha_hora BETWEEN '2024-06-11 00:00:00' AND '2024-06-13 23:59:59';
 
++----------------+-------------+---------------------+------------+----------+
+| seguimiento_id | ubicacion   | fecha_hora          | paquete_id | estado   |
++----------------+-------------+---------------------+------------+----------+
+|             21 | New York    | 2024-06-12 08:00:00 |          3 | recibido |
+|             22 | Los Angeles | 2024-06-13 11:00:00 |          4 | recibido |
++----------------+-------------+---------------------+------------+----------+
 ```
 ### Caso de Uso 10: Obtener Clientes que Tienen Ciertos Tipos de Paquetes
 Un administrador desea obtener todos los clientes que tienen paquetes de ciertos tipos específicos (por ejemplo, 'nacional' o 'internacional').
 ```sql
+SELECT 
+    c.cliente_id,
+    c.nombre,
+    c.email,
+    c.direccion,
+    ts.descripcion AS tipo_servicio
+FROM 
+    clientes c
+JOIN 
+    envios e ON c.cliente_id = e.cliente_id
+JOIN 
+    paquetes p ON e.paquete_id = p.paquete_id
+JOIN 
+    tipo_servicio ts ON p.tipo_servicio_id = ts.tipo_servicio_id
+WHERE 
+    ts.descripcion IN ('nacional', 'internacional');
 
++------------+-----------+-----------------------+-------------------------------------------+---------------+
+| cliente_id | nombre    | email                 | direccion
+    | tipo_servicio |
++------------+-----------+-----------------------+-------------------------------------------+---------------+
+| 1001001001 | Empresa A | contacto@empresaa.com | Calle Falsa 123, Bogotá
+    | nacional      |
+| 3001001001 | Empresa E | contacto@empresae.com | Avenida Insurgentes 123, Ciudad de México | nacional      |
+| 1002002002 | Empresa B | contacto@empresab.com | Avenida Siempre Viva 742, Medellín        | internacional |
++------------+-----------+-----------------------+-------------------------------------------+---------------+
 ```
