@@ -269,15 +269,31 @@ Un administrador desea obtener una lista de todos los conductores y las rutas a 
 ## Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
 Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
 ```sql
-
+    SELECT 
+    ra.ruta_id AS Ruta_id,
+    r.descripcion AS Descripcion,
+    ra.auxiliar_id AS Auxiliar_id,
+    a.nombre AS Nombre_auxiliar
+    
+    FROM ruta_auxiliares ra
+    JOIN rutas r ON ra.ruta_id=r.ruta_id
+    JOIN auxiliares a ON ra.auxiliar_id=a.auxiliar_id
 ```
 ### Caso de Uso 5: Generar Reporte de Paquetes por Sucursal y Estado
 Un administrador desea generar un reporte de todos los paquetes agrupados por sucursal y estado.
 ```sql
-
-```
-### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento
-Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
+    +---------+------------------------------+-------------+-----------------+
+    | Ruta_id | Descripcion                  | Auxiliar_id | Nombre_auxiliar |
+    +---------+------------------------------+-------------+-----------------+
+    |       6 | Ruta Bogotá-Lima             | 00000000001 | Jorge Gonzalez  |
+    |       1 | Ruta Bogotá-Medellín         | 1122334455  | Ana Martínez    |
+    |       2 | Ruta Medellín-Bogotá         | 2233445566  | Luis Castro     |
+    |       3 | Ruta New York-Los Angeles    | 3344556677  | Maria López     |
+    |       4 | Ruta Los Angeles-New York    | 4455667788  | James Brown     |
+    |       5 | Ruta Ciudad de México-Bogotá | 5566778899  | Patricia White  |
+    +---------+------------------------------+-------------+-----------------+
+    ```
+### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
 ```sql
 
 ```
