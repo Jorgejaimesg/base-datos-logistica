@@ -256,17 +256,16 @@ Un administrador desea obtener una lista de todos los conductores y las rutas a 
     JOIN marca_vehiculo mv ON tv.marca_vehiculo_id=mv.marca_vehiculo_id
     
     +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
-| ID_conductor | Nombre         | Sucursal | Ruta | Matricula_vehiculo | Capacidad_Carga | modelo    | descripcion | Marca_Vehiculo |
-+--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
-| 123456789    | Carlos Pérez   |        1 |    1 | ASD123             |
-     1500.00 | Hilux     | Pick-up     | Toyota         |
-| 987654321    | Juan Gómez     |        2 |    2 | BSD124             |         1500.00 | F-150     | Pick-up     | Ford           |
-| 456123789    | John Doe       |        3 |    3 | XYZ789             |         2000.00 | Silverado | Pick-up     | Chevrolet      |
-| 789456123    | Jane Smith     |        4 |    4 | ABC456             |         2000.00 | Hilux     | Pick-up     | Toyota         |
-| 321654987    | Luis Rodríguez |        5 |    5 | QWE567             |         1000.00 | F-150     | Pick-up     | Ford           |
-| 1005338579   | Jorge Jaimes   |        6 |    6 | MVN372             |         1000.20 | Hilux     | Pick-up     | Toyota         |
-+--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
-```
+    | ID_conductor | Nombre         | Sucursal | Ruta | Matricula_vehiculo | Capacidad_Carga | modelo    | descripcion | Marca_Vehiculo |
+    +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
+    | 789456123    | Jane Smith     |        4 |    4 | ABC456             |         2000.00 | Hilux     | Pick-up     | Toyota         |
+    | 123456789    | Carlos Pérez   |        1 |    1 | ASD123             |         1500.00 | Hilux     | Pick-up     | Toyota         |
+    | 1005338579   | Jorge Jaimes   |        6 |    6 | MVN372             |         1000.20 | Hilux     | Pick-up     | Toyota         |
+    | 987654321    | Juan Gómez     |        2 |    2 | BSD124             |         1500.00 | F-150     | Pick-up     | Ford           |
+    | 321654987    | Luis Rodríguez |        5 |    5 | QWE567             |         1000.00 | F-150     | Pick-up     | Ford           |
+    | 456123789    | John Doe       |        3 |    3 | XYZ789             |         2000.00 | Silverado | Pick-up     | Chevrolet      |
+    +--------------+----------------+----------+------+--------------------+-----------------+-----------+-------------+----------------+
+    ```
 ## Caso de Uso 4: Obtener Detalles de Rutas y Auxiliares Asignados
 Un administrador desea obtener detalles de todas las rutas, incluyendo los auxiliares asignados a cada ruta.
 ```sql
