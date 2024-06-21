@@ -295,6 +295,9 @@ Un administrador desea generar un reporte de todos los paquetes agrupados por su
     ```
 ### Caso de Uso 6: Obtener Información Completa de un Paquete y su Historial de Seguimiento Un administrador desea obtener la información completa de un paquete específico y su historial de seguimiento.
 ```sql
+    SELECT
+    FROM
+    JOIN
 
 ```
 
